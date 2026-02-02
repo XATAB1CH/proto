@@ -1,4 +1,4 @@
-module github.com/XATAB1CH/protos
+module github.com/XATAB1CH/proto
 
 go 1.25.3
 
