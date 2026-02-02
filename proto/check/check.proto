@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package check;
+
+option go_package = "github.com/XATAB1CH/uptime-monitor/protos/gen/go/check;check";
+
+service HealthCheckService {
+    // Добавить URL для мониторинга
+    rpc AddURL (AddURLRequest) returns (AddURLResponse);
+    
+    // Получить статус URL
+    rpc GetStatus (GetStatusRequest) returns (GetStatusResponse);
+    
+    // Настроить интервал проверки
+    rpc SetInterval (SetIntervalRequest) returns (SetIntervalResponse);
+}
+
+// Запрос на добавление URL
+message AddURLRequest {
+    string url = 1;
+    int32 interval = 2; // Интервал в секундах
+}
+
+// Ответ на добавление URL
+message AddURLResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// Запрос на получение статуса URL
+message GetStatusRequest {
+    string url = 1;
+}
+
+// Ответ на запрос статуса URL
+message GetStatusResponse {
+    string url = 1;
+    string status = 2; // Например, "up", "down"
+    string last_checked = 3; // Время последней проверки
+}
+
+// Запрос на изменение интервала
+message SetIntervalRequest {
+    string url = 1;
+    int32 interval = 2;
+}
+
+// Ответ на изменение интервала
+message SetIntervalResponse {
+    bool success = 1;
+    string message = 2;
+}
